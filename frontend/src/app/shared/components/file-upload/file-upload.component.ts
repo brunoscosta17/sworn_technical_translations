@@ -23,22 +23,27 @@ export class FileUploadComponent {
   ocrText = '';
   ocrInProgress = false;
 
-  async onFileSelected(event: Event) {
+  async onFileSelected(event: Event, fileInput: HTMLInputElement) {
     const input = event.target as HTMLInputElement;
     if (!input.files?.length) return;
   
     const file = input.files[0];
-    this.isImageFile = file.type.startsWith('image/'); // Correção feita aqui
-  
-    if (this.isImageFile) {
-      const reader = new FileReader();
-      reader.onload = async () => {
-        this.fileData = reader.result;
-        await this.performOCR(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (!file.type.startsWith('image/')) {
+      alert('Please, select an image file.');
+      fileInput.value = '';
+      return;
     }
+    this.isImageFile = true;
+    this.ocrText = '';
+    this.wordCount = 0;
+    const reader = new FileReader();
+    reader.onload = async () => {
+      this.fileData = reader.result;
+      await this.performOCR(reader.result as string);
+    };
+    reader.readAsDataURL(file);
   }
+  
 
   async performOCR(imageData: string) {
     this.ocrInProgress = true;
