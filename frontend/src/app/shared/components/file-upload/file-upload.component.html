@@ -1,8 +1,17 @@
-<div class="container mx-auto">
-    <input type="file" (change)="onFileSelected($event)" class="file-input" />
-    <div *ngIf="fileData" class="mt-4">
-      <img *ngIf="isImageFile" [src]="fileData" class="preview-img" />
-      <p *ngIf="!isImageFile">{{ fileData }}</p>
+<div class="container mx-auto flex">
+    <div class="w-1/2">
+      <input type="file" (change)="onFileSelected($event)" class="file-input" />
+      <div *ngIf="fileData" class="mt-4">
+        <img *ngIf="isImageFile" [src]="fileData" class="preview-img" />
+      </div>
+    </div>
+    <div class="w-1/2">
+      <div *ngIf="ocrInProgress">Processando OCR...</div>
+      <div *ngIf="ocrText" class="mt-4">
+        <p>Texto OCR:</p>
+        <textarea class="border border-gray-300 p-2 w-full" rows="10" [(ngModel)]="ocrText"></textarea>
+        <p>Quantidade de Palavras: {{ wordCount }}</p>
+      </div>
     </div>
   </div>
   
