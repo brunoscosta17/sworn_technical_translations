@@ -1,0 +1,8 @@
+<div class="container mx-auto">
+    <input type="file" (change)="onFileSelected($event)" class="file-input" />
+    <div *ngIf="fileData" class="mt-4">
+      <img *ngIf="isImageFile" [src]="fileData" class="preview-img" />
+      <p *ngIf="!isImageFile">{{ fileData }}</p>
+    </div>
+  </div>
+  
