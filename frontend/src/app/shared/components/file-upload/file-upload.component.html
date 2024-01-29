@@ -1,17 +1,79 @@
-<div class="container mx-auto flex">
-    <div class="w-1/2">
+<!-- <div class="container mx-auto flex">
+  <div class="w-1/2">
     <input type="file" #fileInput (change)="onFileSelected($event, fileInput)" accept="image/*" class="file-input" />
     <div *ngIf="fileData" class="mt-4">
         <img *ngIf="isImageFile" [src]="fileData" class="preview-img" />
     </div>
+  </div>
+  <div class="w-1/2">
+    <div *ngIf="ocrInProgress">Processando OCR...</div>
+    <div *ngIf="ocrText" class="mt-4">
+      <p>Texto OCR:</p>
+      <textarea class="border border-gray-300 p-2 w-full" rows="10" [(ngModel)]="ocrText"></textarea>
+      <p>Quantidade de Palavras: {{ wordCount }}</p>
     </div>
-    <div class="w-1/2">
-      <div *ngIf="ocrInProgress">Processando OCR...</div>
-      <div *ngIf="ocrText" class="mt-4">
-        <p>Texto OCR:</p>
-        <textarea class="border border-gray-300 p-2 w-full" rows="10" [(ngModel)]="ocrText"></textarea>
-        <p>Quantidade de Palavras: {{ wordCount }}</p>
+  </div>
+</div> -->
+
+<!-- <div class="container mx-auto p-8">
+  <div class="flex flex-col items-center justify-center">
+    <div class="bg-white shadow-md rounded-lg p-4 max-w-sm w-full">
+      <h2 class="text-center text-lg font-semibold">Upload de Imagem</h2>
+      
+      <div class="mt-4 flex items-center justify-center">
+        <label class="block w-full">
+          <input type="file" class="hidden" #fileInput (change)="onFileSelected($event, fileInput)" accept="image/*">
+          <div class="cursor-pointer bg-gray-200 rounded-md p-4 text-center">
+            <p>Select or drag an image here</p>
+          </div>
+        </label>
+      </div>
+
+      <div class="mt-4" *ngIf="fileData">
+        <img [src]="fileData" alt="Pré-visualização" class="max-w-sm w-full h-auto rounded-md">
+      </div>
+
+      <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="upload()">
+        Upload
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<div class="flex flex-col md:flex-row justify-center items-center min-h-screen bg-slate-300 p-4">
+  <div class="flex flex-col md:flex-row items-center justify-center">
+    <div class="bg-white shadow-md rounded-lg p-4 w-full md:w-1/2">
+      <h2 class="text-center text-lg font-semibold">Image upload</h2>
+      <div class="mt-4 flex items-center justify-center">
+        <label class="block w-full">
+          <input type="file" class="hidden" #fileInput (change)="onFileSelected($event, fileInput)" accept="image/*">
+          <div class="cursor-pointer bg-gray-200 rounded-md p-4 text-center">
+            <p>Select or drag an image here</p>
+          </div>
+        </label>
+      </div>
+
+      <div class="mt-4 flex justify-center w-full" *ngIf="fileData">
+        <img [src]="fileData" alt="Pré-visualização" class="max-w-sm w-full h-auto rounded-md">
+      </div>
+      <div class="mt-4 flex justify-center w-full" *ngIf="fileData">
+        <p *ngIf="fileName">File selected: {{ fileName }}</p>
+      </div>
+      <div class="flex justify-center items-center">
+        <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" [disabled]="!fileData" (click)="upload()">
+          Upload
+        </button>
+      </div>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-4 w-full md:w-1/2 mt-4 md:mt-0 md:ml-4">
+      <h3 class="text-center text-lg font-semibold">Text OCR</h3>
+      <div class="mt-4 flex justify-center items-center">
+        <p *ngIf="ocrText">{{ ocrText }}</p>
+        <p *ngIf="!ocrText">No text extracted yet.</p>
+      </div>
+      <div class="mt-4 flex justify-center items-center" *ngIf="ocrText">
+        <p>Number of Words: {{ wordCount }}</p>
       </div>
     </div>
   </div>
-  
+</div>

@@ -22,6 +22,31 @@ export class FileUploadComponent {
   wordCount = 0;
   ocrText = '';
   ocrInProgress = false;
+  fileName: string = '';
+
+
+// **************************************************************
+
+  previewImage: string | ArrayBuffer | null = null;
+
+  onFileSelect(event: any): void {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.previewImage = reader.result;
+      };
+    }
+  }
+
+  upload(): void {
+    // Implemente a lógica de upload aqui
+    alert('Imagem enviada!');
+  }
+
+// **************************************************************
+
 
   async onFileSelected(event: Event, fileInput: HTMLInputElement) {
     const input = event.target as HTMLInputElement;
@@ -36,6 +61,7 @@ export class FileUploadComponent {
     this.isImageFile = true;
     this.ocrText = '';
     this.wordCount = 0;
+    this.fileName = file.name;
     const reader = new FileReader();
     reader.onload = async () => {
       this.fileData = reader.result;
