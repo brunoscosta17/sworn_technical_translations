@@ -52,10 +52,15 @@
           </div>
         </label>
       </div>
-
-      <div class="mt-4 flex justify-center w-full" *ngIf="fileData">
-        <img [src]="fileData" alt="Pré-visualização" class="max-w-sm w-full h-auto rounded-md">
+      <div class="mt-4 flex justify-center w-full relative" *ngIf="fileData">
+        <button class="absolute right-0 top-0 bg-red-500 text-white rounded-full p-2 m-1 text-xs h-8 w-8 flex items-center justify-center" (click)="removeImage()">
+          X
+        </button>
+        <img [src]="fileData" alt="Pre-viewr" class="max-w-sm w-full h-auto rounded-md">
       </div>
+      <!-- <div class="mt-4 flex justify-center w-full" *ngIf="fileData">
+        <img [src]="fileData" alt="Pré-visualização" class="max-w-sm w-full h-auto rounded-md">
+      </div> -->
       <div class="mt-4 flex justify-center w-full" *ngIf="fileData">
         <p *ngIf="fileName">File selected: {{ fileName }}</p>
       </div>
@@ -68,8 +73,9 @@
     <div class="bg-white shadow-md rounded-lg p-4 w-full md:w-1/2 mt-4 md:mt-0 md:ml-4">
       <h3 class="text-center text-lg font-semibold">Text OCR</h3>
       <div class="mt-4 flex justify-center items-center">
-        <p *ngIf="ocrText">{{ ocrText }}</p>
-        <p *ngIf="!ocrText">No text extracted yet.</p>
+        <div *ngIf="ocrInProgress" class="spinner"></div>
+        <p *ngIf="!ocrInProgress">{{ ocrText }}</p>
+        <p *ngIf="!ocrText && !ocrInProgress">No text extracted yet.</p>
       </div>
       <div class="mt-4 flex justify-center items-center" *ngIf="ocrText">
         <p>Number of Words: {{ wordCount }}</p>

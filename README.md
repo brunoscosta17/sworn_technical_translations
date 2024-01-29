@@ -1,1 +1,0 @@
-# sworn_technical_translations
